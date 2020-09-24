@@ -1,14 +1,29 @@
 const cron = require("node-cron");
 const express = require("express");
+const superagent = require('superagent');
+
 
 app = express();
 
-let cont = 0;
+app.use(express.json());
 
+cron.schedule("*/5 * * * * *", () => {
 
-cron.schedule("* * * * * *", () => {
-    console.log("Executando a tarefa a cada 1 segundo")
+     console.log("Executando a tarefa a cada 1 segundo")
+
+     superagent
+     .post('localhost:4000/api/login')
+     .send({ username: 'admin', password: '123456' })
+     .set('X-API-Key', 'foobar')
+     .set('accept', 'json')
+     .end((err, res) => {
+      console.log(res.body);
+     });
+
 
 });
 
-app.listen(1313);
+
+app.listen(3000)
+
+
