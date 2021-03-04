@@ -9,7 +9,7 @@ app.use(express.json());
 
 cron.schedule("*/5 * * * * *", () => {
 
-     console.log("Executando a tarefa a cada 1 segundo")
+     console.log("Executando tarefa a cada 5 segundos!")
 
      superagent
      .post('localhost:4000/api/login')
